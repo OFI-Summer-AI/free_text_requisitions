@@ -1,0 +1,47 @@
+.fc-header {
+  position: sticky; top: 0; z-index: 900;
+  width: 100%; padding: 12px 24px;
+  background: var(--ofi-bg,#000000);
+  border-bottom: 1px solid var(--ofi-border,#1F1F1F);
+}
+
+.fc-main-nav__inner {
+  max-width: 1600px; margin: 0 auto;
+  display: flex; align-items: center; gap: 16px; height: 56px;
+  background: var(--ofi-surface,#0A0A0A);
+  border-radius: 40px; border: 1px solid var(--ofi-gold,#CCA23E);
+  padding: 0 24px;
+  box-shadow: 0 0 20px rgba(204,162,62,0.1);
+}
+
+.ofi-logo { flex-shrink: 0; margin-right: 8px; }
+
+.fc-nav { display: flex; align-items: center; gap: 4px; flex: 1; }
+
+.fc-nav__item {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; background: transparent; border: none;
+  border-radius: 25px; font-size: 14px; font-weight: 600;
+  color: var(--ofi-text-secondary,#A0A0A0); cursor: pointer;
+  transition: all 0.2s ease; font-family: var(--font-sans); white-space: nowrap;
+}
+.fc-nav__item:hover { background: var(--ofi-surface-hover,#111111); color: var(--ofi-text-primary,#FFFFFF); }
+.fc-nav__item--active { background: var(--ofi-gold,#CCA23E); color: #000000; }
+.fc-nav__item--active:hover { background: var(--ofi-gold,#CCA23E); opacity: 0.9; color: #000000; }
+
+.fc-nav__right { display: flex; align-items: center; gap: 10px; margin-left: auto; flex-shrink: 0; }
+
+.fc-nav__icon-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--ofi-border,#1F1F1F);
+  background: var(--ofi-surface-hover,#111111);
+  color: var(--ofi-text-secondary,#A0A0A0);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s;
+}
+.fc-nav__icon-btn:hover { background: var(--ofi-gold,#CCA23E); color: #000000; border-color: var(--ofi-gold,#CCA23E); }
+
+/* ── Page layout ──────────────────────────────────────────── */
+.fc-page { display: flex; flex-direction: column; min-height: 100vh; background: var(--ofi-bg,#000000); }
+.fc-page__body { display: flex; flex: 1; overflow: hidden; }
+.fc-page__main { flex: 1; overflow-y: auto; padding: 1.5rem; }
