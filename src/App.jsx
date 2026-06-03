@@ -25,13 +25,6 @@ export default function App() {
               <sup style={{ fontSize: 9, verticalAlign: 'super' }}>™</sup>imec
             </span>
           </div>
-          <span style={{
-            fontWeight: 600, fontSize: 13, color: 'var(--ofi-text-secondary)',
-            paddingRight: 16, marginRight: 4, borderRight: '1px solid var(--ofi-border)',
-          }}>
-            Procurement View
-          </span>
-
           {/* Tabs */}
           <nav className="fc-nav">
             {TABS.map(t => (
