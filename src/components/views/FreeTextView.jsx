@@ -107,18 +107,6 @@ export default function FreeTextView() {
         overflow: 'hidden',
         boxShadow: `0 0 20px rgba(204,162,62,0.08)`,
       }}>
-        {/* IMEC logo block */}
-        <div style={{
-          padding: '18px 28px',
-          borderRight: `1px solid ${C.border}`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          minWidth: 120,
-        }}>
-          <span style={{ fontWeight: 900, fontSize: 22, color: C.gold, letterSpacing: '-1.5px' }}>
-            <sup style={{ fontSize: 10, verticalAlign: 'super' }}>™</sup>imec
-          </span>
-        </div>
-
         {/* KPI 1 */}
         <div style={{ flex: 1, padding: '14px 22px', borderRight: `1px solid ${C.border}` }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 10, color: C.textSec, marginBottom: 4 }}>
