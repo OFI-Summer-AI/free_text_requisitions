@@ -2,11 +2,11 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, PieChart, Pie, Cell, ComposedChart, Line,
 } from 'recharts';
-import { BarChart2, ArrowUpDown, ChevronDown } from 'lucide-react';
+import { BarChart2, ChevronDown } from 'lucide-react';
 import { C } from '../../lib/colors';
 
-// ── Data ──────────────────────────────────────────────────────
-const orders = [
+// ── Mock fallbacks ─────────────────────────────────────────────
+const MOCK_orders = [
   { id:'PO-2024-0001', material:'CH-400452-0-VT',  desc:'Industrial Vacuum Pump Series V4',      supplier:'Pfeiffer Vacuum GmbH',     cost:24800, delivery:'2024-07-15', status:'Pending',  priority:'High',   match:94, approved:false },
   { id:'PO-2024-0002', material:'CH-100070-0-2p',  desc:'Lab Grade Isopropanol 5L × 20',          supplier:'VWR International',        cost:3200,  delivery:'2024-07-18', status:'Approved', priority:'Medium', match:87, approved:true  },
   { id:'PO-2024-0003', material:'CH-400000-0-Mi',  desc:'Optical Microscope Slides (×500)',        supplier:'Thermo Fisher Scientific', cost:845,   delivery:'2024-07-22', status:'Pending',  priority:'Low',    match:91, approved:false },
@@ -21,7 +21,7 @@ const orders = [
   { id:'PO-2024-0012', material:'CH-100010-6-2p',  desc:'PCB Soldering Flux Pen (×24)',            supplier:'MG Chemicals',             cost:420,   delivery:'2024-08-22', status:'Pending',  priority:'Low',    match:88, approved:false },
 ];
 
-const categories = [
+const MOCK_categories = [
   { name: 'Lab Equipment',       cat: 4521, ftRate: 22 },
   { name: 'PPE & Safety',        cat: 3812, ftRate: 55 },
   { name: 'Chemicals & Gases',   cat: 3240, ftRate: 18 },
@@ -32,12 +32,12 @@ const categories = [
   { name: 'Software & Licences', cat: 980,  ftRate: 9  },
 ];
 
-const coverage = [
-  { name: 'Catalog-linked', value: 65.4, color: C.gold   },
-  { name: 'Free-text orders', value: 34.6, color: C.border },
+const MOCK_coverage = [
+  { name: 'Catalog-linked',  value: 65.4 },
+  { name: 'Free-text orders', value: 34.6 },
 ];
 
-const timelineData = [
+const MOCK_timeline = [
   { m: '2024-05', orders: 4200, ftRate: 82 }, { m: '2024-06', orders: 5800, ftRate: 91 },
   { m: '2024-07', orders: 4600, ftRate: 85 }, { m: '2024-08', orders: 4900, ftRate: 88 },
   { m: '2024-09', orders: 5100, ftRate: 90 }, { m: '2024-10', orders: 5400, ftRate: 92 },
@@ -52,21 +52,16 @@ const timelineData = [
   { m: '2026-03', orders: 5800, ftRate: 93 }, { m: '2026-04', orders: 3900, ftRate: 88 },
 ];
 
-const mergedTimelineData = timelineData.map(d => ({
-  m: d.m,
-  ftOrders:       Math.round(d.orders * d.ftRate / 100),
-  contractOrders: d.orders - Math.round(d.orders * d.ftRate / 100),
-  ftRate:         d.ftRate,
-}));
-
-const plantData = [
-  { name: 'ADM – IMEC Administratie', value: 20.36, color: C.gold    },
-  { name: 'FI01 – IMEC FINLAND',      value: 20.36, color: '#B8963A' },
-  { name: 'Z001 – IMEC VZW',          value: 20.36, color: '#555555' },
-  { name: 'IM – IMEC 1',              value: 20.36, color: '#333333' },
-  { name: 'Others (6)',               value: 18.55, color: '#222222' },
+const MOCK_plants = [
+  { name: 'ADM – IMEC Administratie', value: 20.36 },
+  { name: 'FI01 – IMEC FINLAND',      value: 20.36 },
+  { name: 'Z001 – IMEC VZW',          value: 20.36 },
+  { name: 'IM – IMEC 1',              value: 20.36 },
+  { name: 'Others (6)',               value: 18.55 },
 ];
 
+const PLANT_COLORS    = [C.gold, '#B8963A', '#555555', '#333333', '#222222'];
+const COVERAGE_COLORS = [C.gold, C.border];
 
 // ── Pie label ─────────────────────────────────────────────────
 const R = Math.PI / 180;
@@ -107,7 +102,6 @@ function ChartLegend({ items }) {
   );
 }
 
-// ── Section divider label ─────────────────────────────────────
 function SectionLabel({ children }) {
   return (
     <div style={{
@@ -123,7 +117,24 @@ function SectionLabel({ children }) {
 }
 
 // ── View ──────────────────────────────────────────────────────
-export default function OverviewView() {
+export default function OverviewView({ data }) {
+  const orders     = data?.orders     ?? MOCK_orders;
+  const categories = data?.categories ?? MOCK_categories;
+  const timeline   = data?.timeline   ?? MOCK_timeline;
+  const plants     = data?.plants     ?? MOCK_plants;
+  const coverage   = (data?.coverage  ?? MOCK_coverage).map((c, i) => ({
+    ...c, color: COVERAGE_COLORS[i] ?? C.border,
+  }));
+  const plantData = plants.map((p, i) => ({
+    ...p, color: PLANT_COLORS[i] ?? '#1a1a1a',
+  }));
+  const mergedTimelineData = timeline.map(d => ({
+    m:              d.m,
+    ftOrders:       Math.round(d.orders * d.ftRate / 100),
+    contractOrders: d.orders - Math.round(d.orders * d.ftRate / 100),
+    ftRate:         d.ftRate,
+  }));
+
   const pending  = orders.filter(o => o.status === 'Pending').length;
   const avgMatch = Math.round(orders.reduce((a, o) => a + o.match, 0) / orders.length);
 
@@ -131,9 +142,8 @@ export default function OverviewView() {
     <div>
 
       {/* ════════════════════════════════════════════════════
-          TOP — All KPIs (Requisition + Catalog, 8 cards)
+          TOP — KPIs
           ════════════════════════════════════════════════════ */}
-
       <div className="kpi-efficiency-grid" style={{ marginBottom: 20, gridTemplateColumns: 'repeat(6, 1fr)' }}>
         {[
           { label: 'Total Purchase Requisitions', value: orders.length, gold: false  },
@@ -141,7 +151,7 @@ export default function OverviewView() {
           { label: 'Avg Match Confidence',        value: `${avgMatch}%`, gold: true   },
           { label: 'Total Line Items',            value: '45,231',       gold: false  },
           { label: 'Free-Text Rate',              value: '34.6%',        danger: true },
-          { label: 'Material Categories',         value: '8',            gold: false  },
+          { label: 'Material Categories',         value: categories.length, gold: false },
         ].map(({ label, value, gold, danger }) => (
           <div key={label} className="kpi-card">
             <div className="kpi-card__value"
@@ -162,7 +172,7 @@ export default function OverviewView() {
       </div>
 
       {/* ════════════════════════════════════════════════════
-          MIDDLE — Charts from Material Catalog View
+          MIDDLE — Charts
           ════════════════════════════════════════════════════ */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 12, marginBottom: 12 }}>
 
@@ -186,7 +196,7 @@ export default function OverviewView() {
                 <YAxis type="category" dataKey="name" width={130} tick={{ fontSize: 10, fill: C.textPri }} />
                 <Tooltip contentStyle={C.tip} />
                 <Bar dataKey="cat"    name="Catalog-linked" fill={C.gold}   radius={[0, 0, 0, 0]} />
-                <Bar dataKey="ftRate" name="Free-text %"       fill={C.border} radius={[0, 2, 2, 0]} />
+                <Bar dataKey="ftRate" name="Free-text %"    fill={C.border} radius={[0, 2, 2, 0]} />
               </BarChart>
             </ResponsiveContainer>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 20, fontSize: 10, color: C.textSec, marginTop: 8 }}>
@@ -299,7 +309,6 @@ export default function OverviewView() {
           </div>
         </div>
       </div>
-
 
     </div>
   );

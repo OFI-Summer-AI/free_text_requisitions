@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Search, ArrowUpDown, CheckCircle, ShieldCheck, AlertCircle } from 'lucide-react';
 import { C } from '../../lib/colors';
 
-const orders = [
+const MOCK_orders = [
   { id:'PO-2024-0001', material:'CH-400452-0-VT',  desc:'Industrial Vacuum Pump Series V4',      supplier:'Pfeiffer Vacuum GmbH',     cost:24800, delivery:'2024-07-15', status:'Pending',  priority:'High',   match:94, approved:false },
   { id:'PO-2024-0002', material:'CH-100070-0-2p',  desc:'Lab Grade Isopropanol 5L × 20',          supplier:'VWR International',        cost:3200,  delivery:'2024-07-18', status:'Approved', priority:'Medium', match:87, approved:true  },
   { id:'PO-2024-0003', material:'CH-400000-0-Mi',  desc:'Optical Microscope Slides (×500)',        supplier:'Thermo Fisher Scientific', cost:845,   delivery:'2024-07-22', status:'Pending',  priority:'Low',    match:91, approved:false },
@@ -17,19 +17,20 @@ const orders = [
   { id:'PO-2024-0012', material:'CH-100010-6-2p',  desc:'PCB Soldering Flux Pen (×24)',             supplier:'MG Chemicals',             cost:420,   delivery:'2024-08-22', status:'Pending',  priority:'Low',    match:88, approved:false },
 ];
 
-export default function FreeTextView() {
-  const [search, setSearch]           = useState('');
+export default function FreeTextView({ data }) {
+  const [search, setSearch]             = useState('');
   const [filterStatus, setFilterStatus] = useState('All');
 
-  const highConf   = orders.filter(o => o.match >= 90).length;
-  const medConf    = orders.filter(o => o.match >= 75 && o.match < 90).length;
-  const lowConf    = orders.filter(o => o.match < 75).length;
-  const avgMatch   = Math.round(orders.reduce((a, o) => a + o.match, 0) / orders.length);
+  const orders = Array.isArray(data) ? [...MOCK_orders, ...data] : MOCK_orders;
+
+  const highConf = orders.filter(o => o.match >= 90).length;
+  const medConf  = orders.filter(o => o.match >= 75 && o.match < 90).length;
+  const avgMatch = Math.round(orders.reduce((a, o) => a + o.match, 0) / orders.length);
 
   const filtered = orders.filter(o => {
     const matchesSearch =
-      o.material.toLowerCase().includes(search.toLowerCase()) ||
-      o.desc.toLowerCase().includes(search.toLowerCase());
+      (o.material ?? '').toLowerCase().includes(search.toLowerCase()) ||
+      (o.desc ?? '').toLowerCase().includes(search.toLowerCase());
     const matchesFilter = filterStatus === 'All' || o.status === filterStatus;
     return matchesSearch && matchesFilter;
   });
@@ -42,10 +43,10 @@ export default function FreeTextView() {
           ════════════════════════════════════════════════════ */}
       <div className="kpi-efficiency-grid" style={{ marginBottom: 20, gridTemplateColumns: 'repeat(4, 1fr)' }}>
         {[
-          { label: 'Matched Items',          value: orders.length, gold: false  },
-          { label: 'High Confidence (≥90%)', value: highConf,      gold: true   },
-          { label: 'Medium Confidence',      value: medConf,       gold: false  },
-          { label: 'Avg Match Confidence',   value: `${avgMatch}%`,gold: true   },
+          { label: 'Matched Items',          value: orders.length, gold: false },
+          { label: 'High Confidence (≥90%)', value: highConf,      gold: true  },
+          { label: 'Medium Confidence',      value: medConf,       gold: false },
+          { label: 'Avg Match Confidence',   value: `${avgMatch}%`,gold: true  },
         ].map(({ label, value, gold }) => (
           <div key={label} className="kpi-card">
             <div className="kpi-card__value" style={{ color: gold ? C.gold : C.textPri }}>{value}</div>
@@ -118,7 +119,7 @@ export default function FreeTextView() {
                     </span>
                   </td>
                   <td style={{ color: C.textSec }}>{o.supplier}</td>
-                  <td style={{ textAlign: 'right', fontWeight: 700 }}>€{o.cost.toLocaleString()}</td>
+                  <td style={{ textAlign: 'right', fontWeight: 700 }}>€{(o.cost ?? 0).toLocaleString()}</td>
                   <td style={{ color: C.textSec }}>{o.delivery}</td>
                   <td>
                     <span className={
@@ -137,10 +138,10 @@ export default function FreeTextView() {
                       </div>
                       <span style={{ fontSize: 11, color: C.textSec, minWidth: 28 }}>{o.match}%</span>
                       {o.match >= 90
-                        ? <CheckCircle  size={12} color={C.gold}    />
+                        ? <CheckCircle size={12} color={C.gold}    />
                         : o.match >= 75
-                          ? <ShieldCheck  size={12} color="#E2A020"  />
-                          : <AlertCircle  size={12} color={C.textSec}/>
+                          ? <ShieldCheck size={12} color="#E2A020"  />
+                          : <AlertCircle size={12} color={C.textSec}/>
                       }
                     </div>
                   </td>
