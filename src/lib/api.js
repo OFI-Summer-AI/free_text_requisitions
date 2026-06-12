@@ -8,6 +8,14 @@ export const fetchDashboard = async () => {
   return JSON.parse(text);
 };
 
+// ── Railway DB: matched_catalogue table ─────────────────────────
+export const fetchMatchedCatalogue = async () => {
+  const res = await fetch('/api/matched-catalogue');
+  if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
+  return res.json();
+};
+
+
 export const submitBuyerRequisition = async (payload) => {
   const res = await fetch(`${N8N_BASE}/webhook/buyer-requisition`, {
     method: 'POST',

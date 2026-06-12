@@ -349,7 +349,7 @@ export default function ProcurementView() {
                   labelLine={{ stroke: G.mid, strokeWidth: 0.8 }}
                   label={PieOuterLabel}
                 >
-                  {plantData.map((e, i) => <Cell key={i} fill={e.color} />)}
+                  {plantData.map((e) => <Cell key={e.name} fill={e.color} />)}
                 </Pie>
                 <Tooltip
                   formatter={(v) => `${v}%`}
@@ -401,7 +401,7 @@ export default function ProcurementView() {
               <tbody>
                 {metricsData.map((row, i) => (
                   <tr
-                    key={i}
+                    key={row.material + i}
                     className={cn(
                       'border-b border-[#F0F0F0] hover:bg-[#FDFCF7] transition-colors',
                       i % 2 === 0 ? '' : 'bg-[#FAFAF8]'
