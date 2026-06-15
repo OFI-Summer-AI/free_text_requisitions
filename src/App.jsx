@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Bell, Download, LayoutGrid, RefreshCw } from 'lucide-react';
 import { fetchDashboard } from './lib/api';
-import OverviewView  from './components/views/OverviewView';
-import FreeTextView  from './components/views/FreeTextView';
+import OverviewView from './components/views/OverviewView';
+import FreeTextView from './components/views/FreeTextView';
 import SuggestionsView from './components/views/SuggestionsView';
 import BuyerRequisitionView from './components/views/BuyerRequisitionView';
+import logo from './assets/logo.png';
 
 const TABS = [
-  { id: 'overview',     label: 'Overview'             },
-  { id: 'matched',      label: 'Matched Catalog'      },
-  { id: 'nonmatched',   label: 'Contract Suggestion'  },
-  { id: 'requisition',  label: 'Buyer Requisition'    },
+  { id: 'overview', label: 'Overview' },
+  { id: 'matched', label: 'Matched Catalog' },
+  { id: 'nonmatched', label: 'Contract Suggestion' },
+  { id: 'requisition', label: 'Buyer Requisition' },
 ];
 
 export default function App() {
@@ -20,7 +21,7 @@ export default function App() {
   useEffect(() => {
     fetchDashboard()
       .then(data => { console.log('n8n response:', JSON.stringify(data, null, 2)); setDATA(data); })
-      .catch(() => {}); // n8n not ready yet — views fall back to their own mock data
+      .catch(() => { }); // n8n not ready yet — views fall back to their own mock data
   }, []);
 
   return (
@@ -28,9 +29,19 @@ export default function App() {
       <header className="fc-header">
         <div className="fc-main-nav__inner">
           {/* Brand */}
-          <div className="ofi-logo">
-            <span style={{ fontWeight: 900, fontSize: 18, color: 'var(--ofi-gold)', letterSpacing: '-1px' }}>
-              <sup style={{ fontSize: 9, verticalAlign: 'super' }}>™</sup>imec
+          <div className="ofi-logo" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img src={logo} alt="Logo" style={{ height: '44px', width: 'auto' }} />
+            <span style={{ 
+              fontWeight: 900, 
+              fontSize: 30, 
+              color: 'var(--ofi-gold)', 
+              letterSpacing: '-1.5px',
+              textShadow: '2px 2px 0 rgba(0, 0, 0, 0.7), 0 0 12px rgba(204, 162, 62, 0.4)',
+              lineHeight: 1,
+              display: 'inline-flex',
+              alignItems: 'flex-start'
+            }}>
+              <sup style={{ fontSize: 12, fontWeight: 800, marginTop: '4px', marginRight: '2px' }}>™</sup>imec
             </span>
           </div>
 
@@ -63,10 +74,10 @@ export default function App() {
 
       <div className="fc-page__body">
         <main className="fc-page__main">
-          {active === 'overview'   && <OverviewView   data={DATA?.overview} />}
-          {active === 'matched'      && <FreeTextView         data={DATA?.matched} />}
-          {active === 'nonmatched'   && <SuggestionsView      data={DATA?.nonmatched} />}
-          {active === 'requisition'  && <BuyerRequisitionView />}
+          {active === 'overview' && <OverviewView data={DATA?.overview} />}
+          {active === 'matched' && <FreeTextView data={DATA?.matched} />}
+          {active === 'nonmatched' && <SuggestionsView data={DATA?.nonmatched} />}
+          {active === 'requisition' && <BuyerRequisitionView />}
         </main>
       </div>
     </div>
