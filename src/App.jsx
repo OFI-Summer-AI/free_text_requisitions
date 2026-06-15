@@ -31,18 +31,6 @@ export default function App() {
           {/* Brand */}
           <div className="ofi-logo" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img src={logo} alt="Logo" style={{ height: '44px', width: 'auto' }} />
-            <span style={{ 
-              fontWeight: 900, 
-              fontSize: 30, 
-              color: 'var(--ofi-gold)', 
-              letterSpacing: '-1.5px',
-              textShadow: '2px 2px 0 rgba(0, 0, 0, 0.7), 0 0 12px rgba(204, 162, 62, 0.4)',
-              lineHeight: 1,
-              display: 'inline-flex',
-              alignItems: 'flex-start'
-            }}>
-              <sup style={{ fontSize: 12, fontWeight: 800, marginTop: '4px', marginRight: '2px' }}>™</sup>imec
-            </span>
           </div>
 
           {/* Tabs */}

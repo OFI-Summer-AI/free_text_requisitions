@@ -170,11 +170,8 @@ export default function ProcurementView() {
 
       {/* ── KPI strip ── */}
       <div className="bg-white border-b border-[#E8E8E8] flex divide-x divide-[#E8E8E8]">
-        {/* IMEC logo block */}
+        {/* Logo block */}
         <div className="flex items-center justify-center px-8 py-4 min-w-[130px]">
-          <span className="text-[22px] font-black tracking-[-1px] text-[#0A0A0A]">
-            ™<span className="ml-1 font-black">imec</span>
-          </span>
         </div>
 
         {/* KPI 1 */}
