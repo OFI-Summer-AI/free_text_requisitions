@@ -1,5 +1,9 @@
 const N8N_BASE = import.meta.env.VITE_N8N_BASE_URL;
 
+// In production (Vercel), set VITE_API_BASE_URL to your Railway backend URL.
+// In development, leave it empty — Vite's proxy handles /api → localhost:3001.
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export const fetchDashboard = async () => {
   const res = await fetch(`${N8N_BASE}/webhook/api/dashboard`);
   if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
@@ -10,7 +14,7 @@ export const fetchDashboard = async () => {
 
 // ── Railway DB: matched_catalogue table ─────────────────────────
 export const fetchMatchedCatalogue = async () => {
-  const res = await fetch('/api/matched-catalogue');
+  const res = await fetch(`${API_BASE}/api/matched-catalogue`);
   if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
   return res.json();
 };
