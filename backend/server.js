@@ -11,7 +11,8 @@ const app = express();
 
 // Allow requests from the Vercel frontend (set ALLOWED_ORIGIN in Railway env vars)
 // Falls back to '*' during local development if not set
-const allowedOrigin = process.env.ALLOWED_ORIGIN || '*';
+// Strip any accidental trailing slash from the env var
+const allowedOrigin = (process.env.ALLOWED_ORIGIN || '*').replace(/\/$/, '');
 app.use(cors({
   origin: allowedOrigin,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
