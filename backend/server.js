@@ -39,6 +39,16 @@ app.get('/api/matched-catalogue', async (req, res) => {
   }
 });
 
+// ── Root route ──────────────────────────────────────────────────
+app.get('/', (_req, res) => res.json({
+  status: 'ok',
+  message: 'Free Text Requisitions API is running',
+  endpoints: [
+    'GET /api/health',
+    'GET /api/matched-catalogue',
+  ]
+}));
+
 // ── Health check ────────────────────────────────────────────────
 app.get('/api/health', (_req, res) => res.json({ ok: true }));
 
