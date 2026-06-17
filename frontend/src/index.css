@@ -1,0 +1,5 @@
+/* OFI Design System */
+@import './styles/globals.css';
+@import './styles/components.css';
+@import './styles/dashboard.css';
+@import './styles/topheader.css';

@@ -1,0 +1,16 @@
+{
+  "name": "free-text-requisitions",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix frontend && npm install --prefix backend",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:all": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "build:frontend": "npm --prefix frontend run build"
+  },
+  "dependencies": {
+    "concurrently": "^10.0.3"
+  }
+}

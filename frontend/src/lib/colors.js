@@ -1,0 +1,23 @@
+export const C = {
+  gold:     '#CCA23E',
+  goldDim:  'rgba(204,162,62,0.15)',
+  goldRing: 'rgba(204,162,62,0.3)',
+  black:    '#000000',
+  surface:  '#0A0A0A',
+  surface2: '#111111',
+  border:   '#1F1F1F',
+  textPri:  '#FFFFFF',
+  textSec:  '#A0A0A0',
+  muted:    '#8C8C8C',
+  red:      '#EF4444',
+  green:    '#22C55E',
+  grid:     '#1F1F1F',
+  tip: {
+    background: '#0A0A0A',
+    border: '1px solid #CCA23E',
+    borderRadius: '10px',
+    color: '#FFFFFF',
+    fontSize: 12,
+    padding: '10px 14px',
+  },
+};

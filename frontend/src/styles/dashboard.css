@@ -1,0 +1,109 @@
+/* ── KPI Efficiency Grid ──────────────────────────────────── */
+.kpi-efficiency-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem;
+}
+@media (max-width:1024px) { .kpi-efficiency-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width:640px)  { .kpi-efficiency-grid { grid-template-columns: 1fr; } }
+
+/* ── KPI Card ─────────────────────────────────────────────── */
+.kpi-card {
+  background: var(--ofi-surface,#0A0A0A); padding: 1.25rem;
+  border-radius: 16px; border: 1px solid var(--ofi-gold,#CCA23E);
+  transition: all 0.3s ease; position: relative; overflow: hidden;
+}
+.kpi-card:hover { box-shadow: 0 0 20px rgba(204,162,62,0.15); }
+.kpi-card__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.kpi-card__icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.kpi-card__trend-badge {
+  font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.kpi-card__value {
+  font-size: 2.25rem; font-weight: 800; line-height: 1; margin-bottom: 4px;
+  letter-spacing: -0.02em; color: var(--ofi-text-primary,#FFFFFF);
+}
+.kpi-card__label { font-size: 13px; font-weight: 600; color: var(--ofi-text-secondary,#A0A0A0); margin-bottom: 4px; }
+.kpi-card__desc  { font-size: 12px; color: var(--color-muted); margin-bottom: 12px; }
+.kpi-card__progress { height: 4px; background: var(--color-subtle); border-radius: 2px; overflow: hidden; }
+.kpi-card__progress-fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
+
+.kpi-card__shimmer {
+  width: 60%; height: 20px;
+  background: linear-gradient(90deg,var(--color-subtle) 25%,var(--color-border) 50%,var(--color-subtle) 75%);
+  background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Chart Section ────────────────────────────────────────── */
+.chart-section {
+  background: var(--ofi-surface,#0A0A0A); border-radius: 16px;
+  border: 1px solid rgba(204,162,62,0.3);
+  box-shadow: 0 0 15px rgba(204,162,62,0.05);
+  overflow: hidden; transition: all 0.3s ease;
+}
+.chart-section:hover { border-color: rgba(204,162,62,0.6); box-shadow: 0 0 25px rgba(204,162,62,0.15); }
+.chart-section__header {
+  padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--ofi-border,#1F1F1F);
+}
+.chart-section__title-group { display: flex; align-items: center; gap: 12px; }
+.chart-section__icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(204,162,62,0.1); color: var(--ofi-gold,#CCA23E);
+  display: flex; align-items: center; justify-content: center;
+}
+.chart-section__title    { font-size: 1rem; font-weight: 700; color: var(--ofi-text-primary,#FFFFFF); margin: 0; }
+.chart-section__subtitle { font-size: 12px; color: var(--ofi-text-secondary, #A0A0A0); opacity: 0.85; font-weight: 500; margin: 2px 0 0; }
+.chart-section__body     { padding: 1rem 1.25rem 1.25rem; }
+
+/* ── Dashboard Layout Sections ───────────────────────────── */
+.dashboard-kpi-section { margin-bottom: 1.5rem; }
+.dashboard-kpi-section__title {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--color-muted); margin-bottom: 0.75rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.dashboard-charts-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem; margin-bottom: 1rem; align-items: stretch;
+}
+.dashboard-charts-row--single { grid-template-columns: 1fr; }
+@media (max-width:1024px) { .dashboard-charts-row { grid-template-columns: 1fr; } }
+
+/* ── Dark Table ───────────────────────────────────────────── */
+.dark-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.dark-table thead tr { border-bottom: 1px solid var(--ofi-border,#1F1F1F); }
+.dark-table th {
+  padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em; color: var(--ofi-text-secondary,#A0A0A0);
+  white-space: nowrap; vertical-align: middle;
+}
+.dark-table td {
+  padding: 10px 14px; color: var(--ofi-text-primary,#FFFFFF);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: middle;
+}
+.dark-table tbody tr:hover { background: var(--ofi-surface-hover,#111111); }
+.dark-table tbody tr:last-child td { border-bottom: none; }
+
+/* ── Gold Badge ───────────────────────────────────────────── */
+.badge-gold    { background: var(--ofi-gold,#CCA23E); color: #000; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+.badge-danger  { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+.badge-success { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+.badge-neutral { background: var(--ofi-surface-hover,#111111); color: var(--ofi-text-secondary,#A0A0A0); border: 1px solid var(--ofi-border,#1F1F1F); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+
+/* ── Suboptimal Tile ──────────────────────────────────────── */
+.suboptimal-tile {
+  background: var(--ofi-surface,#0A0A0A); padding: 1.25rem;
+  border-radius: 16px; border: 1px solid var(--ofi-gold,#CCA23E);
+  position: relative; overflow: hidden; transition: all 0.3s ease;
+}
+.suboptimal-tile:hover { box-shadow: 0 0 20px rgba(204,162,62,0.15); }
+.suboptimal-tile__header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+.suboptimal-tile__icon   { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.suboptimal-tile__value  { font-size: 2rem; font-weight: 800; line-height: 1; color: var(--ofi-text-primary,#FFFFFF); margin-bottom: 4px; letter-spacing: -0.02em; }
+.suboptimal-tile__label  { font-size: 13px; font-weight: 600; color: var(--ofi-text-secondary,#A0A0A0); }
+.suboptimal-tile__desc   { font-size: 12px; color: var(--color-muted); margin-top: 4px; }
