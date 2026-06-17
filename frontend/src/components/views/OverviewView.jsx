@@ -60,8 +60,8 @@ const MOCK_plants = [
   { name: 'Others (6)',               value: 18.55 },
 ];
 
-const PLANT_COLORS    = [C.gold, '#B8963A', '#555555', '#333333', '#222222'];
-const COVERAGE_COLORS = [C.gold, C.border];
+const PLANT_COLORS    = [C.gold, '#B8963A', '#777777', '#666666', '#555555'];
+const COVERAGE_COLORS = [C.gold, '#555555'];
 
 // ── Pie label ─────────────────────────────────────────────────
 const R = Math.PI / 180;
@@ -194,13 +194,13 @@ export default function OverviewView({ data }) {
                 <XAxis type="number" tick={{ fontSize: 9, fill: C.textSec }}
                   tickFormatter={v => `${(v / 1000).toFixed(1)}K`} />
                 <YAxis type="category" dataKey="name" width={130} tick={{ fontSize: 10, fill: C.textPri }} />
-                <Tooltip contentStyle={C.tip} />
+                <Tooltip contentStyle={C.tip} itemStyle={{ color: '#fff' }} />
                 <Bar dataKey="cat"    name="Catalog-linked" fill={C.gold}   radius={[0, 0, 0, 0]} />
-                <Bar dataKey="ftRate" name="Free-text %"    fill={C.border} radius={[0, 2, 2, 0]} />
+                <Bar dataKey="ftRate" name="Free-text %"    fill="#555555" radius={[0, 2, 2, 0]} />
               </BarChart>
             </ResponsiveContainer>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 20, fontSize: 10, color: C.textSec, marginTop: 8 }}>
-              {[{ color: C.gold, label: 'Catalog-linked' }, { color: C.border, label: 'Free-text' }].map(({ color, label }) => (
+              {[{ color: C.gold, label: 'Catalog-linked' }, { color: '#555555', label: 'Free-text' }].map(({ color, label }) => (
                 <span key={label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <span style={{ width: 12, height: 12, borderRadius: 3, background: color, display: 'inline-block' }} />
                   {label}
@@ -227,7 +227,7 @@ export default function OverviewView({ data }) {
                 dataKey="value" labelLine={{ stroke: C.border, strokeWidth: 0.8 }} label={PieLabel}>
                 {coverage.map((e, i) => <Cell key={i} fill={e.color} />)}
               </Pie>
-              <Tooltip formatter={v => `${v}%`} contentStyle={C.tip} />
+              <Tooltip formatter={v => `${v}%`} contentStyle={C.tip} itemStyle={{ color: '#fff' }} />
             </PieChart>
             <div style={{ display: 'flex', gap: 20, fontSize: 11, color: C.textSec }}>
               {coverage.map(e => (
@@ -267,10 +267,10 @@ export default function OverviewView({ data }) {
                 <XAxis dataKey="m" tick={{ fontSize: 8, fill: C.textSec }} angle={-45} textAnchor="end" interval={0} height={46} />
                 <YAxis yAxisId="l" tick={{ fontSize: 9, fill: C.textSec }} tickFormatter={v => `${v / 1000}K`} width={32} />
                 <YAxis yAxisId="r" orientation="right" tick={{ fontSize: 9, fill: C.textSec }} domain={[0, 100]} unit="%" width={36} />
-                <Tooltip contentStyle={C.tip} formatter={(v, name) =>
+                <Tooltip contentStyle={C.tip} itemStyle={{ color: '#fff' }} formatter={(v, name) =>
                   name === 'FreeText rate' ? `${v}%` : v.toLocaleString()
                 } />
-                <Bar yAxisId="l" dataKey="contractOrders" stackId="s" fill={C.border} name="Contract-based" maxBarSize={18} />
+                <Bar yAxisId="l" dataKey="contractOrders" stackId="s" fill="#555555" name="Contract-based" maxBarSize={18} />
                 <Bar yAxisId="l" dataKey="ftOrders"       stackId="s" fill={C.gold}   name="Free-text orders" radius={[2, 2, 0, 0]} maxBarSize={18} />
                 <Line yAxisId="r" type="monotone" dataKey="ftRate" stroke={C.textPri} strokeWidth={1.5}
                   dot={{ r: 2.5, fill: C.textPri, strokeWidth: 0 }} name="FreeText rate" />
@@ -278,7 +278,7 @@ export default function OverviewView({ data }) {
             </ResponsiveContainer>
             <ChartLegend items={[
               { color: C.gold,    label: 'Free-text orders' },
-              { color: C.border,  label: 'Contract-based orders' },
+              { color: '#555555',  label: 'Contract-based orders' },
               { color: C.textPri, label: 'FreeText order rate' },
             ]} />
             <p style={{ textAlign: 'center', fontSize: 10, color: C.textSec, marginTop: 4 }}>Month →</p>
@@ -303,7 +303,7 @@ export default function OverviewView({ data }) {
                   dataKey="value" labelLine={{ stroke: C.border, strokeWidth: 0.8 }} label={OuterLabel}>
                   {plantData.map((e, i) => <Cell key={i} fill={e.color} />)}
                 </Pie>
-                <Tooltip formatter={v => `${v}%`} contentStyle={C.tip} />
+                <Tooltip formatter={v => `${v}%`} contentStyle={C.tip} itemStyle={{ color: '#fff' }} />
               </PieChart>
             </ResponsiveContainer>
           </div>

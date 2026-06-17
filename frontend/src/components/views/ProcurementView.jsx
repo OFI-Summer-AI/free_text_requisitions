@@ -21,9 +21,9 @@ const orderVsRequest = [
 const plantData = [
   { name:'ADM – Free Text Administratie', value:20.36, color:C.gold    },
   { name:'FI01 – Free Text FINLAND',      value:20.36, color:'#B8963A' },
-  { name:'Z001 – Free Text VZW',          value:20.36, color:'#555555' },
-  { name:'IM – Free Text 1',              value:20.36, color:'#333333' },
-  { name:'Others (6)',               value:18.55, color:'#242424' },
+  { name:'Z001 – Free Text VZW',          value:20.36, color:'#777777' },
+  { name:'IM – Free Text 1',              value:20.36, color:'#666666' },
+  { name:'Others (6)',               value:18.55, color:'#555555' },
 ];
 
 const monthlyTrend = [
@@ -132,9 +132,9 @@ export default function ProcurementView() {
                 <CartesianGrid strokeDasharray="3 3" stroke={C.grid} vertical={false} />
                 <XAxis dataKey="name" tick={{ fontSize:10, fill:C.textSec }} />
                 <YAxis tick={{ fontSize:9, fill:C.textSec }} unit="%" domain={[0,100]} width={36} />
-                <Tooltip contentStyle={C.tip} formatter={v=>`${v}%`} />
+                <Tooltip contentStyle={C.tip} itemStyle={{ color: '#fff' }} formatter={v=>`${v}%`} />
                 <Bar dataKey="value" radius={[6,6,0,0]} maxBarSize={60} name="Share %">
-                  {ftrVsContract.map((_,i) => <Cell key={i} fill={i===0?C.gold:C.border} />)}
+                  {ftrVsContract.map((_,i) => <Cell key={i} fill={i===0?C.gold:'#555555'} />)}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
@@ -168,7 +168,7 @@ export default function ProcurementView() {
                 <CartesianGrid strokeDasharray="3 3" stroke={C.grid} vertical={false} />
                 <XAxis dataKey="name" tick={{ fontSize:9, fill:C.textSec }} />
                 <YAxis tick={{ fontSize:9, fill:C.textSec }} tickFormatter={v=>`${(v/1000).toFixed(0)}K`} width={36} />
-                <Tooltip contentStyle={C.tip} formatter={v=>v.toLocaleString()} />
+                <Tooltip contentStyle={C.tip} itemStyle={{ color: '#fff' }} formatter={v=>v.toLocaleString()} />
                 <Bar dataKey="value" radius={[6,6,0,0]} maxBarSize={40} name="Count">
                   {orderVsRequest.map((_,i)=><Cell key={i} fill={i===0?C.gold:i===1?'#B8963A':i===2?'#555':'#333'} />)}
                 </Bar>
@@ -202,7 +202,7 @@ export default function ProcurementView() {
                 dataKey="value" labelLine={false} label={OuterLabel}>
                 {plantData.map((e,i)=><Cell key={i} fill={e.color} />)}
               </Pie>
-              <Tooltip formatter={v=>`${v}%`} contentStyle={C.tip} />
+              <Tooltip formatter={v=>`${v}%`} contentStyle={C.tip} itemStyle={{ color: '#fff' }} />
             </PieChart>
             <div style={{ width:'100%', display:'flex', flexDirection:'column', gap:4, marginTop:4 }}>
               {plantData.map(p=>(
@@ -240,7 +240,7 @@ export default function ProcurementView() {
                 <CartesianGrid strokeDasharray="3 3" stroke={C.grid} vertical={false} />
                 <XAxis dataKey="m" tick={{ fontSize:10, fill:C.textSec }} />
                 <YAxis tick={{ fontSize:9, fill:C.textSec }} unit="%" domain={[20,80]} width={36} />
-                <Tooltip contentStyle={C.tip} formatter={v=>`${v}%`} />
+                <Tooltip contentStyle={C.tip} itemStyle={{ color: '#fff' }} formatter={v=>`${v}%`} />
                 <Line type="monotone" dataKey="ftr"      stroke={C.gold}   strokeWidth={2} dot={{ r:4, fill:C.gold, strokeWidth:0 }} name="FT Rate %" />
                 <Line type="monotone" dataKey="contract" stroke={C.textSec} strokeWidth={2} dot={{ r:4, fill:C.textSec, strokeWidth:0 }} strokeDasharray="5 3" name="Contract Rate %" />
               </LineChart>
@@ -265,7 +265,7 @@ export default function ProcurementView() {
                 <CartesianGrid strokeDasharray="3 3" stroke={C.grid} vertical={false} />
                 <XAxis dataKey="m" tick={{ fontSize:10, fill:C.textSec }} />
                 <YAxis tick={{ fontSize:9, fill:C.textSec }} tickFormatter={v=>`${v/1000}K`} width={36} />
-                <Tooltip contentStyle={C.tip} formatter={v=>v.toLocaleString()} />
+                <Tooltip contentStyle={C.tip} itemStyle={{ color: '#fff' }} formatter={v=>v.toLocaleString()} />
                 <Bar dataKey="items" fill={C.gold} fillOpacity={0.85} radius={[4,4,0,0]} maxBarSize={40} name="PO Items" />
               </BarChart>
             </ResponsiveContainer>
