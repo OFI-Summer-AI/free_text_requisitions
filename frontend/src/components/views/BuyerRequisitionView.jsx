@@ -4,11 +4,11 @@ import { submitBuyerRequisition } from '../../lib/api';
 import { C } from '../../lib/colors';
 
 const PLANTS = [
-  'AR - Free Text LEUVEN',
+  'AR - LEUVEN',
   'VMO - VAN MOER',
-  'FI01 – Free Text FINLAND',
+  'FI01 – FINLAND',
   'PXR - NIPPON GASSES',
-  'HOT - Free Text FINLAND',
+  'HOT - FINLAND',
   'ADI',
   'VZW',
 ];
@@ -22,9 +22,9 @@ const FIELD_LABEL = {
 export default function BuyerRequisitionView() {
   const [form, setForm] = useState({
     description: '',
-    buyer_name:  '',
-    email:       '',
-    plant:       '',
+    buyer_name: '',
+    email: '',
+    plant: '',
   });
   const [status, setStatus] = useState(null); // null | 'loading' | 'success' | 'error'
   const [errMsg, setErrMsg] = useState('');
@@ -42,14 +42,14 @@ export default function BuyerRequisitionView() {
     setErrMsg('');
     try {
       await submitBuyerRequisition({
-        description:      form.description.trim(),
-        raw_body:         form.description.trim(),
-        buyer_name:       form.buyer_name.trim(),
-        sender:           form.buyer_name.trim(),
-        email:            form.email.trim(),
-        requester_email:  form.email.trim(),
-        client_name:      form.plant,
-        plant:            form.plant,
+        description: form.description.trim(),
+        raw_body: form.description.trim(),
+        buyer_name: form.buyer_name.trim(),
+        sender: form.buyer_name.trim(),
+        email: form.email.trim(),
+        requester_email: form.email.trim(),
+        client_name: form.plant,
+        plant: form.plant,
       });
       setStatus('success');
       setForm({ description: '', buyer_name: '', email: '', plant: '' });
