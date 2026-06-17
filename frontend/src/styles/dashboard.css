@@ -56,7 +56,7 @@
   display: flex; align-items: center; justify-content: center;
 }
 .chart-section__title    { font-size: 1rem; font-weight: 700; color: var(--ofi-text-primary,#FFFFFF); margin: 0; }
-.chart-section__subtitle { font-size: 12px; color: var(--color-muted); margin: 2px 0 0; }
+.chart-section__subtitle { font-size: 12px; color: var(--ofi-text-secondary, #A0A0A0); opacity: 0.85; font-weight: 500; margin: 2px 0 0; }
 .chart-section__body     { padding: 1rem 1.25rem 1.25rem; }
 
 /* ── Dashboard Layout Sections ───────────────────────────── */
@@ -79,11 +79,12 @@
 .dark-table th {
   padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.05em; color: var(--ofi-text-secondary,#A0A0A0);
-  white-space: nowrap;
+  white-space: nowrap; vertical-align: middle;
 }
 .dark-table td {
   padding: 10px 14px; color: var(--ofi-text-primary,#FFFFFF);
   border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: middle;
 }
 .dark-table tbody tr:hover { background: var(--ofi-surface-hover,#111111); }
 .dark-table tbody tr:last-child td { border-bottom: none; }

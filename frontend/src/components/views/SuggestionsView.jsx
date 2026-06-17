@@ -159,13 +159,15 @@ export default function SuggestionsView({ data }) {
           <table className="dark-table">
             <thead>
               <tr>
-                {['Item Description', 'Vendor', 'Orders (12M)', 'Total Spend', 'Avg Order', 'Recommendation', 'Est. Saving', 'Priority', 'Action'].map(h => (
-                  <th key={h}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                {['Item Description', 'Vendor', 'Orders (12M)', 'Total Spend', 'Avg Order', 'Recommendation', 'Est. Saving', 'Priority', 'Action'].map(h => {
+                  const isCenter = ['Orders (12M)', 'Total Spend', 'Avg Order', 'Est. Saving'].includes(h);
+                  return (
+                  <th key={h} style={{ textAlign: isCenter ? 'center' : 'left' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: isCenter ? 'center' : 'flex-start', gap: 4 }}>
                       {h} <ArrowUpDown size={9} color={C.border} />
                     </span>
                   </th>
-                ))}
+                )})}
               </tr>
             </thead>
             <tbody>
@@ -180,9 +182,9 @@ export default function SuggestionsView({ data }) {
                       </span>
                     </td>
                     <td style={{ color: C.textSec, fontSize: 11 }}>{item.vendor}</td>
-                    <td style={{ textAlign: 'right', fontWeight: 700 }}>{item.orders}</td>
-                    <td style={{ textAlign: 'right', color: C.textSec }}>€{(item.spend / 1000).toFixed(0)}K</td>
-                    <td style={{ textAlign: 'right', color: C.textSec }}>€{avgOrder.toLocaleString()}</td>
+                    <td style={{ textAlign: 'center', fontWeight: 700 }}>{item.orders}</td>
+                    <td style={{ textAlign: 'center', color: C.textSec }}>€{(item.spend / 1000).toFixed(0)}K</td>
+                    <td style={{ textAlign: 'center', color: C.textSec }}>€{avgOrder.toLocaleString()}</td>
                     <td>
                       <span style={{
                         fontSize: 10, padding: '3px 8px', borderRadius: 6, fontWeight: 600,
@@ -193,7 +195,7 @@ export default function SuggestionsView({ data }) {
                         {item.rec === 'contract_vendor' ? 'New Contract' : 'Consolidate'}
                       </span>
                     </td>
-                    <td style={{ textAlign: 'right' }}>
+                    <td style={{ textAlign: 'center' }}>
                       <span style={{ color: C.gold, fontWeight: 700 }}>{item.saving}%</span>
                       <span style={{ color: C.textSec, fontSize: 10, display: 'block' }}>€{(savingEUR / 1000).toFixed(0)}K/yr</span>
                     </td>

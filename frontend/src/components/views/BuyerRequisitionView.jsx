@@ -4,11 +4,11 @@ import { submitBuyerRequisition } from '../../lib/api';
 import { C } from '../../lib/colors';
 
 const PLANTS = [
-  'AR - IMEC LEUVEN',
+  'AR - Free Text LEUVEN',
   'VMO - VAN MOER',
-  'FI01 – IMEC FINLAND',
+  'FI01 – Free Text FINLAND',
   'PXR - NIPPON GASSES',
-  'HOT - IMEC FINLAND',
+  'HOT - Free Text FINLAND',
   'ADI',
   'VZW',
 ];
@@ -129,7 +129,7 @@ export default function BuyerRequisitionView() {
               type="email"
               value={form.email}
               onChange={e => set('email', e.target.value)}
-              placeholder="e.g. jan.desmedt@imec.be"
+              placeholder="e.g. jan.desmedt@freetext.com"
               className="form-input"
               style={{ fontSize: 13 }}
             />

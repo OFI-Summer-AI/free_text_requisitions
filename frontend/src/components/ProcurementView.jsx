@@ -62,10 +62,10 @@ const classificationData = [
 ];
 
 const plantData = [
-  { name: 'ADM – IMEC Administratie', value: 20.36, color: G.gold },
-  { name: 'FI01 – IMEC FINLAND',      value: 20.36, color: G.goldLight },
-  { name: 'Z001 – IMEC VZW',          value: 20.36, color: G.mid },
-  { name: 'IM – IMEC 1',              value: 20.36, color: G.light },
+  { name: 'ADM – Free Text Administratie', value: 20.36, color: G.gold },
+  { name: 'FI01 – Free Text FINLAND',      value: 20.36, color: G.goldLight },
+  { name: 'Z001 – Free Text VZW',          value: 20.36, color: G.mid },
+  { name: 'IM – Free Text 1',              value: 20.36, color: G.light },
   { name: 'Others (6)',               value: 18.55, color: G.border },
 ];
 

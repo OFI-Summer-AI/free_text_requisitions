@@ -8,7 +8,7 @@ export const C = {
   border:   '#1F1F1F',
   textPri:  '#FFFFFF',
   textSec:  '#A0A0A0',
-  muted:    '#555555',
+  muted:    '#8C8C8C',
   red:      '#EF4444',
   green:    '#22C55E',
   grid:     '#1F1F1F',

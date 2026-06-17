@@ -53,10 +53,10 @@ const MOCK_timeline = [
 ];
 
 const MOCK_plants = [
-  { name: 'ADM – IMEC Administratie', value: 20.36 },
-  { name: 'FI01 – IMEC FINLAND',      value: 20.36 },
-  { name: 'Z001 – IMEC VZW',          value: 20.36 },
-  { name: 'IM – IMEC 1',              value: 20.36 },
+  { name: 'ADM – Free Text Administratie', value: 20.36 },
+  { name: 'FI01 – Free Text FINLAND',      value: 20.36 },
+  { name: 'Z001 – Free Text VZW',          value: 20.36 },
+  { name: 'IM – Free Text 1',              value: 20.36 },
   { name: 'Others (6)',               value: 18.55 },
 ];
 
@@ -223,7 +223,7 @@ export default function OverviewView({ data }) {
           </div>
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 16px 16px' }}>
             <PieChart width={210} height={210}>
-              <Pie data={coverage} cx={103} cy={103} innerRadius={58} outerRadius={94}
+              <Pie data={coverage} cx={103} cy={103} innerRadius={50} outerRadius={80}
                 dataKey="value" labelLine={{ stroke: C.border, strokeWidth: 0.8 }} label={PieLabel}>
                 {coverage.map((e, i) => <Cell key={i} fill={e.color} />)}
               </Pie>
@@ -299,7 +299,7 @@ export default function OverviewView({ data }) {
           <div className="chart-section__body" style={{ display: 'flex', justifyContent: 'center' }}>
             <ResponsiveContainer width="100%" height={260}>
               <PieChart>
-                <Pie data={plantData} cx="50%" cy="50%" innerRadius={70} outerRadius={108}
+                <Pie data={plantData} cx="50%" cy="50%" innerRadius={55} outerRadius={85}
                   dataKey="value" labelLine={{ stroke: C.border, strokeWidth: 0.8 }} label={OuterLabel}>
                   {plantData.map((e, i) => <Cell key={i} fill={e.color} />)}
                 </Pie>

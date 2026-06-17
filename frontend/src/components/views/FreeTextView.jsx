@@ -183,20 +183,22 @@ export default function FreeTextView({ data }) {
           <table className="dark-table">
             <thead>
               <tr>
-                <th style={{ width: 32 }}></th>
-                {['MATERIAL', 'DESCRIPTION', 'SUPPLIER', 'COST [EUR]', 'DELIVERY', 'STATUS', 'PRIORITY', 'MATCH', 'APPROVAL'].map(h => (
-                  <th key={h}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <th style={{ width: 32, textAlign: 'center' }}></th>
+                {['MATERIAL', 'DESCRIPTION', 'SUPPLIER', 'COST [EUR]', 'DELIVERY', 'STATUS', 'PRIORITY', 'MATCH', 'APPROVAL'].map(h => {
+                  const isCenter = ['COST [EUR]'].includes(h);
+                  return (
+                  <th key={h} style={{ textAlign: isCenter ? 'center' : 'left' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: isCenter ? 'center' : 'flex-start', gap: 4 }}>
                       {h} <ArrowUpDown size={9} color={C.border} />
                     </span>
                   </th>
-                ))}
+                )})}
               </tr>
             </thead>
             <tbody>
               {filtered.map(o => (
                 <tr key={o.id}>
-                  <td><input type="checkbox" style={{ accentColor: C.gold }} /></td>
+                  <td style={{ textAlign: 'center' }}><input type="checkbox" style={{ accentColor: C.gold }} /></td>
                   <td style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: C.gold, fontWeight: 700 }}>{o.material}</td>
                   <td style={{ maxWidth: 220 }}>
                     <span style={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -204,7 +206,7 @@ export default function FreeTextView({ data }) {
                     </span>
                   </td>
                   <td style={{ color: C.textSec }}>{o.supplier}</td>
-                  <td style={{ textAlign: 'right', fontWeight: 700 }}>€{(o.cost ?? 0).toLocaleString()}</td>
+                  <td style={{ textAlign: 'center', fontWeight: 700 }}>€{(o.cost ?? 0).toLocaleString()}</td>
                   <td style={{ color: C.textSec }}>{o.delivery}</td>
                   <td>
                     <span className={

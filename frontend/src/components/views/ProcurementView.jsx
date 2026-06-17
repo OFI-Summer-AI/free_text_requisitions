@@ -19,10 +19,10 @@ const orderVsRequest = [
 ];
 
 const plantData = [
-  { name:'ADM – IMEC Administratie', value:20.36, color:C.gold    },
-  { name:'FI01 – IMEC FINLAND',      value:20.36, color:'#B8963A' },
-  { name:'Z001 – IMEC VZW',          value:20.36, color:'#555555' },
-  { name:'IM – IMEC 1',              value:20.36, color:'#333333' },
+  { name:'ADM – Free Text Administratie', value:20.36, color:C.gold    },
+  { name:'FI01 – Free Text FINLAND',      value:20.36, color:'#B8963A' },
+  { name:'Z001 – Free Text VZW',          value:20.36, color:'#555555' },
+  { name:'IM – Free Text 1',              value:20.36, color:'#333333' },
   { name:'Others (6)',               value:18.55, color:'#242424' },
 ];
 
@@ -36,11 +36,11 @@ const monthlyTrend = [
 ];
 
 const procurementTable = [
-  { plant:'ADM – IMEC Administratie', ftrRate:'72.4%', ftrEur:'195M', orderItems:'20,845', contracted:'7,920',  matched:'18,412', saving:'€18.4M' },
-  { plant:'FI01 – IMEC FINLAND',      ftrRate:'68.1%', ftrEur:'172M', orderItems:'20,836', contracted:'9,104',  matched:'17,891', saving:'€14.2M' },
-  { plant:'Z001 – IMEC VZW',          ftrRate:'70.3%', ftrEur:'218M', orderItems:'20,839', contracted:'8,421',  matched:'19,104', saving:'€16.8M' },
-  { plant:'IM – IMEC 1',              ftrRate:'65.9%', ftrEur:'163M', orderItems:'20,842', contracted:'10,200', matched:'16,800', saving:'€12.1M' },
-  { plant:'POR – IMEC PROCESS',       ftrRate:'74.8%', ftrEur:'63M',  orderItems:'9,238',  contracted:'3,820',  matched:'8,102',  saving:'€5.4M'  },
+  { plant:'ADM – Free Text Administratie', ftrRate:'72.4%', ftrEur:'195M', orderItems:'20,845', contracted:'7,920',  matched:'18,412', saving:'€18.4M' },
+  { plant:'FI01 – Free Text FINLAND',      ftrRate:'68.1%', ftrEur:'172M', orderItems:'20,836', contracted:'9,104',  matched:'17,891', saving:'€14.2M' },
+  { plant:'Z001 – Free Text VZW',          ftrRate:'70.3%', ftrEur:'218M', orderItems:'20,839', contracted:'8,421',  matched:'19,104', saving:'€16.8M' },
+  { plant:'IM – Free Text 1',              ftrRate:'65.9%', ftrEur:'163M', orderItems:'20,842', contracted:'10,200', matched:'16,800', saving:'€12.1M' },
+  { plant:'POR – Free Text PROCESS',       ftrRate:'74.8%', ftrEur:'63M',  orderItems:'9,238',  contracted:'3,820',  matched:'8,102',  saving:'€5.4M'  },
 ];
 
 const R = Math.PI / 180;
@@ -295,13 +295,15 @@ export default function ProcurementView() {
           <table className="dark-table">
             <thead>
               <tr>
-                {['Plant','FT Rate','FT Spend [EUR]','Total Order Items','Contract Based','Matched to Catalogue','Savings Potential'].map((h,i) => (
-                  <th key={i}>
-                    <span style={{ display:'flex', alignItems:'center', gap:4 }}>
+                {['Plant','FT Rate','FT Spend [EUR]','Total Order Items','Contract Based','Matched to Catalogue','Savings Potential'].map((h,i) => {
+                  const isCenter = ['FT Rate', 'FT Spend [EUR]', 'Total Order Items', 'Contract Based', 'Matched to Catalogue', 'Savings Potential'].includes(h);
+                  return (
+                  <th key={i} style={{ textAlign: isCenter ? 'center' : 'left' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: isCenter ? 'center' : 'flex-start', gap: 4 }}>
                       {h} <ArrowUpDown size={9} color={C.border} />
                     </span>
                   </th>
-                ))}
+                )})}
               </tr>
             </thead>
             <tbody>
@@ -309,18 +311,18 @@ export default function ProcurementView() {
                 <tr key={i}>
                   <td style={{ fontWeight:700, color:C.textPri, whiteSpace:'nowrap' }}>{r.plant}</td>
                   <td>
-                    <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+                    <div style={{ display:'flex', alignItems:'center', justifyContent: 'center', gap:8 }}>
                       <div style={{ width:60, height:4, background:C.border, borderRadius:2, overflow:'hidden' }}>
                         <div style={{ width:r.ftrRate, height:'100%', background:`linear-gradient(90deg,${C.gold},#E2C96A)`, borderRadius:2 }} />
                       </div>
                       <span style={{ fontWeight:700, color:C.gold }}>{r.ftrRate}</span>
                     </div>
                   </td>
-                  <td style={{ textAlign:'right', color:C.textSec }}>{r.ftrEur}</td>
-                  <td style={{ textAlign:'right', fontWeight:700, color:C.textPri }}>{r.orderItems}</td>
-                  <td style={{ textAlign:'right', color:C.textSec }}>{r.contracted}</td>
-                  <td style={{ textAlign:'right', color:C.textSec }}>{r.matched}</td>
-                  <td style={{ textAlign:'right' }}>
+                  <td style={{ textAlign:'center', color:C.textSec }}>{r.ftrEur}</td>
+                  <td style={{ textAlign:'center', fontWeight:700, color:C.textPri }}>{r.orderItems}</td>
+                  <td style={{ textAlign:'center', color:C.textSec }}>{r.contracted}</td>
+                  <td style={{ textAlign:'center', color:C.textSec }}>{r.matched}</td>
+                  <td style={{ textAlign:'center' }}>
                     <span className="badge-gold" style={{ fontSize:10 }}>{r.saving}</span>
                   </td>
                 </tr>
@@ -329,12 +331,12 @@ export default function ProcurementView() {
             <tfoot>
               <tr style={{ borderTop:`1px solid ${C.border}` }}>
                 <td style={{ fontWeight:800, color:C.gold, fontSize:12 }}>TOTAL</td>
-                <td style={{ fontWeight:800, color:C.gold }}>69.51%</td>
-                <td style={{ textAlign:'right', fontWeight:700, color:C.textPri }}>811M</td>
-                <td style={{ textAlign:'right', fontWeight:700, color:C.textPri }}>92,600</td>
-                <td style={{ textAlign:'right', color:C.textSec }}>39,465</td>
-                <td style={{ textAlign:'right', color:C.textSec }}>80,309</td>
-                <td style={{ textAlign:'right' }}>
+                <td style={{ textAlign: 'center', fontWeight:800, color:C.gold }}>69.51%</td>
+                <td style={{ textAlign:'center', fontWeight:700, color:C.textPri }}>811M</td>
+                <td style={{ textAlign:'center', fontWeight:700, color:C.textPri }}>92,600</td>
+                <td style={{ textAlign:'center', color:C.textSec }}>39,465</td>
+                <td style={{ textAlign:'center', color:C.textSec }}>80,309</td>
+                <td style={{ textAlign:'center' }}>
                   <span className="badge-gold" style={{ fontSize:11 }}>€66.9M</span>
                 </td>
               </tr>
